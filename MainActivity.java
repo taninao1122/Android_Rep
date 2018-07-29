@@ -25,9 +25,8 @@ public class MainActivity extends AppCompatActivity {
                 //   list.add("VIew");
                 Intent intent1 = new Intent(getApplication(),VIewMemoList.class);
                 intent1.putStringArrayListExtra("List",list);
-                // int requestCode1 = 1000;
-                //startActivityForResult(intent1,requestCode1);
-                startActivity(intent1);
+                int requestCode1 = 1000;
+                startActivityForResult(intent1,requestCode1);
             }
         });
         button2.setOnClickListener(new View.OnClickListener() {
@@ -36,28 +35,38 @@ public class MainActivity extends AppCompatActivity {
                 //    list.add("Add");
                 Intent intent2 = new Intent(getApplication(),AddMemoList.class);
                 intent2.putStringArrayListExtra("List",list);
-                int requestCode1 = 2000;
-                startActivityForResult(intent2,requestCode1);
+                int requestCode2 = 2000;
+                startActivityForResult(intent2,requestCode2);
             }
         });
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //    list.add("VIew");
                 Intent intent3 = new Intent(getApplication(),VIewMemoList.class);
                 intent3.putStringArrayListExtra("List",list);
-                //   int requestCode1 = 1000;
-                //   startActivityForResult(intent3,requestCode1);
-                startActivity(intent3);
+                int requestCode1 = 1000;
+                startActivityForResult(intent3,requestCode1);
+
             }
         });
+
+
 
     }
 
     public void onActivityResult( int requestCode, int resultCode, Intent intent )
     {
+        if(requestCode == 1000)
+        {
+            if( resultCode == Activity.RESULT_OK ){
+
+                // 返却されてきたintentから値を取り出す
+                list = intent.getStringArrayListExtra( "ViewList" );
+
+            }
+        }
         // startActivityForResult()の際に指定した識別コードとの比較
-        if(requestCode == 2000 ){
+        else if(requestCode == 2000 ){
 
             // 返却結果ステータスとの比較
             if( resultCode == Activity.RESULT_OK ){

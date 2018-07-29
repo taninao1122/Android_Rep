@@ -19,9 +19,6 @@ public class AddMemoList extends AppCompatActivity {
         setContentView(R.layout.activity_add_memo_list);
         final ArrayList<String> addlist = getIntent().getStringArrayListExtra("List");
 
-        //  ListView listView = new ListView(this);
-     //   ArrayAdapter<String> arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,list);
-
         if(addlist.size() == 0) {
               addlist.add("ここにメモが表示されます");
           }
@@ -34,7 +31,6 @@ public class AddMemoList extends AppCompatActivity {
          button5.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
-             //    ArrayList<String> list = getIntent().getStringArrayListExtra("List");
                  EditText editText = (EditText)findViewById(R.id.editText);
                  String text = editText.getText().toString();
                  addlist.add(text);

@@ -11,32 +11,26 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 public class VIewMemoList extends AppCompatActivity{
-    //   ArrayList<String> list = getIntent().getStringArrayListExtra("List");
+     private ArrayList<String> viewlist = new ArrayList<String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_memo_list);
-        ArrayList<String> list = getIntent().getStringArrayListExtra("List");
-
-        if(list.size() == 0) {
-            list.add("ここにメモが表示されます");
-        }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,list);
+        final ArrayList<String> viewlist = getIntent().getStringArrayListExtra("List");
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,viewlist);
         ListView listView = (ListView)findViewById(R.id.listView1);
         listView.setAdapter(adapter);
-        Button button5 = (Button) findViewById(R.id.button5);
+        Button backButton2 = (Button) findViewById(R.id.back_button2);
 
-    }
-    public void onClickButton4(View view){
-
-    }
-
-    public void onClickBackButton2(View view) {
-        Intent intent = new Intent();
-        ArrayList<String> list = getIntent().getStringArrayListExtra("List");
-        intent.putStringArrayListExtra("List", list);
-        setResult(RESULT_OK, intent);
-        finish();
+        backButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putStringArrayListExtra("ViewList", viewlist);
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        });
 
     }
 }
