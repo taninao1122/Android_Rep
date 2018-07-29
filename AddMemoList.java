@@ -12,41 +12,43 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 public class AddMemoList extends AppCompatActivity {
-    ArrayList<String> list = getIntent().getStringArrayListExtra("List");
+    private ArrayList<String> addlist = new ArrayList<String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_memo_list);
-        //    ArrayList<String> list = getIntent().getStringArrayListExtra("List2");
-     //   ListView listView = new ListView(this);
+        final ArrayList<String> addlist = getIntent().getStringArrayListExtra("List");
+
+        //  ListView listView = new ListView(this);
      //   ArrayAdapter<String> arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,list);
 
-        if(list.size() == 0) {
-              list.add("ここにメモが表示されます");
+        if(addlist.size() == 0) {
+              addlist.add("ここにメモが表示されます");
           }
-         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,list);
+         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,addlist);
           ListView listView = (ListView)findViewById(R.id.listView1);
           listView.setAdapter(adapter);
-         Button button4 = findViewById(R.id.button5);
+         Button button5 = findViewById(R.id.button5);
+         Button backButton = findViewById(R.id.back_button);
 
+         button5.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+             //    ArrayList<String> list = getIntent().getStringArrayListExtra("List");
+                 EditText editText = (EditText)findViewById(R.id.editText);
+                 String text = editText.getText().toString();
+                 addlist.add(text);
+                 editText.getEditableText().clear();
+             }
+         });
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putStringArrayListExtra("addList", addlist);
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        });
     }
-
-    public void onClickButton4(View view){
-
-    //   ArrayList<String> list = getIntent().getStringArrayListExtra("List2");
-        EditText editText = (EditText)findViewById(R.id.editText);
-     //   SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        String text = editText.getText().toString();
-        list.add(text);
-        editText.getEditableText().clear();
-    }
-
-    public void onClickBackButton(View view){
-        Intent intent = new Intent();
-    //   ArrayList<String> list =
-        intent.putStringArrayListExtra("List", list);
-        setResult(RESULT_OK, intent);
-    }
-
-
 }
