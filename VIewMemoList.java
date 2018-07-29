@@ -17,11 +17,12 @@ public class VIewMemoList extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_memo_list);
         final ArrayList<String> viewlist = getIntent().getStringArrayListExtra("List");
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,viewlist);
-        ListView listView = (ListView)findViewById(R.id.listView1);
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,viewlist);
+        final ListView listView = (ListView)findViewById(R.id.listView1);
         listView.setAdapter(adapter);
-        Button backButton2 = (Button) findViewById(R.id.back_button2);
 
+        Button backButton2 = (Button) findViewById(R.id.back_button2);
+        Button deleteButton = (Button)findViewById(R.id.button5);
         backButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -31,6 +32,14 @@ public class VIewMemoList extends AppCompatActivity{
                 finish();
             }
         });
-
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(viewlist.size() != 0) {
+                     viewlist.remove(1);
+                     listView.setAdapter(adapter);
+                }
+            }
+        });
     }
 }
